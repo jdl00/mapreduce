@@ -14,8 +14,11 @@ class Shuffler():
         Returns:
             int: Hashed and sorted word
         """
+        # Sort the key
         char_list = list(word)
         sorted_char = sorted(char_list)
+
+        # Return the hashed, sorted key
         return hash(''.join(sorted_char))
 
     def __init__(self, mapping):
@@ -42,23 +45,11 @@ class Shuffler():
         """
         assert len(self.__mapping) > 0, "Map from mapper is empty"
 
-        # add the word to form a tuple, hash the key
+        # Add the word to form a tuple, hash the key
         self.__mapping = [self.__form_tuple(word, value) for word, value in self.__mapping]
 
+        # Sort the mapping using the hashed value
         self.__shuffled_mapping = sorted(self.__mapping, key=lambda x: x[0])
 
     def get_shuffled_mapping(self):
         return self.__shuffled_mapping
-
-# Driver Code
-'''
-words = None
-with open("test_book.txt", 'r') as f:
-    words = f.readlines()
-mapper = Mapper(words)
-mapper.map()
-map = mapper.get()
-
-shuffler = Shuffler(map)
-shuffler.shuffle()
-'''

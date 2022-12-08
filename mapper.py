@@ -74,23 +74,3 @@ class Mapper():
         assert len(self.__map) > 0, "Get should only be called once map has been called"        
 
         return self.__map
-
-
-# Testing code:
-'''
-def main():
-    words = None
-    with open("test_book.txt", 'r') as f:
-        words = f.readlines()
-    mapper = Mapper(words)
-    mapper.map()
-    map = mapper.get()
-
-    for record in map:
-        print(record)
-
-
-if __name__ == "__main__":
-    main()
-'''
-
