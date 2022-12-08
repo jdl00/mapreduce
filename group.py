@@ -5,7 +5,7 @@ class Group:
     __hash_value: int
     __anagrams: list
 
-    def __init__(self, hash_value, word) -> None:
+    def __init__(self, hash_value, word):
         """Creates an instance of a group
 
         Args:
@@ -19,7 +19,7 @@ class Group:
         self.__hash_value = hash_value
 
     @property 
-    def count(self) -> int:
+    def count(self):
         """Gets the number of anagrams 
 
         Returns:
@@ -38,10 +38,10 @@ class Group:
 
     @property
     def hash_value(self):
-        """_summary_
+        """Returns the hash value of the anagrams
 
         Returns:
-            _type_: _description_
+            int: The hash value of the group
         """
         return self.__hash_value
 
