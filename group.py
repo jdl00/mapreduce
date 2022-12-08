@@ -2,21 +2,18 @@ from dataclasses import dataclass
 
 @dataclass
 class Group:
-    __hash_value: int
     __anagrams: list
 
-    def __init__(self, hash_value, word):
+    def __init__(self, word):
         """Creates an instance of a group
 
         Args:
             hash_value (int): Hash value of the word
             word (str): Word to be added to anagrams
         """
-        assert isinstance(hash_value, int), "Hash value is not an integer"
         assert isinstance(word, str), "Word is not a string"
-
+        self.__anagrams = []
         self.__anagrams.append(word)
-        self.__hash_value = hash_value
 
     @property 
     def count(self):
@@ -36,14 +33,6 @@ class Group:
         """
         return self.__anagrams
 
-    @property
-    def hash_value(self):
-        """Returns the hash value of the anagrams
-
-        Returns:
-            int: The hash value of the group
-        """
-        return self.__hash_value
 
     def add(self, word):
         """Adds word to the anagram list
