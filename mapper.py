@@ -1,10 +1,15 @@
-from re import findall
+from re import findall, sub
 
 class Mapper():
     """ Mapper class for the MapReduce programming model.
         This class is responsible for performing the mapping 
         of keys to value, for use by the shuffler.
     """
+    # Regex for only letters
+    CONST_RE_WORDS = r'[a-zA-Z]'
+
+    # Regex for only symbols
+    CONST_RE_SYMBOLS = r'[^\w\s]'
 
     def __init__(self, lines):
         """Initialises an instance of the mapper
@@ -26,6 +31,9 @@ class Mapper():
         # Replace all newlines with a space to mark for splitting
         lines = [line.replace("\n"," ") for line in self.__lines]
 
+        # Replace symbols such as '-' with spaces to seperate
+        lines = [sub(self.CONST_RE_SYMBOLS, " ", line) for line in lines]
+
         # Form a string of all the lines
         temp_str = "".join(lines) 
 
@@ -33,7 +41,7 @@ class Mapper():
         split_words = temp_str.split(' ')
 
         # Extract out only the words in the string 
-        split_words = [''.join(findall(r'[a-zA-Z]', word)) for word in split_words]
+        split_words = [''.join(findall(self.CONST_RE_WORDS, word)) for word in split_words]
 
         # Removes empty elements and converts all the elements to lower case
         # as well as removing single letters
