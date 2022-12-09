@@ -1,4 +1,5 @@
 from re import findall, sub
+from json import load
 
 class Mapper():
     """ Mapper class for the MapReduce programming model.
@@ -22,11 +23,18 @@ class Mapper():
         self.__words = ""
         self.__lines = lines
         self.__map = []
+        self.__stop_words = []
+
+        with open("stop_words.json", "r") as f:
+            self.__stop_words = load(f)
     
     def __clean(self):
         """ Cleans the list of words, so that they are all just natural words
         """
         assert len(self.__lines) > 0, "Expected to be filled with lines from the txt"
+
+        # We also want to clean the stop words to allow proper comparison
+        self.__stop_words = [word.replace('\'','') for word in self.__stop_words]
 
         # Replace all newlines with a space to mark for splitting
         lines = [line.replace("\n"," ") for line in self.__lines]
@@ -46,6 +54,9 @@ class Mapper():
         # Removes empty elements and converts all the elements to lower case
         # as well as removing single letters
         split_words = [word.lower() for word in split_words if word and len(word) > 1]
+
+        # Remove all the words in the stop words list
+        split_words = [word for word in split_words if word in self.__stop_words]
 
         # Removes duplicated words and stores to the words variable
         unique_set = set(split_words)
