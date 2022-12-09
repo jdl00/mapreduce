@@ -45,23 +45,20 @@ class Reducer():
             # Add the word to the anagram group
             self.__grouped_records[map_idx].add(key)
 
-        # Populate a new list of all the anagrams 
-        new_list = []
-        for group in self.__grouped_records:
-            if group.count > 1:
-                new_list.append(group)
-        self.__grouped_records = new_list
-
     def get_anagrams(self):
         """Returns a list of Groups containing anagrams
 
         Returns:
             list: List of grouped anagrams
         """
-        return self.__grouped_records
+        # Populate a new list of all the anagrams 
+        new_list = []
+        for group in self.__grouped_records:
+            if group.count > 1:
+                new_list.append(group)
+
+        return new_list
                 
     def output(self):
         for group in self.__grouped_records:
             print(group.anagrams)
-
-
