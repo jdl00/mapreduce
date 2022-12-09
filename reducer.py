@@ -51,6 +51,14 @@ class Reducer():
             if group.count > 1:
                 new_list.append(group)
         self.__grouped_records = new_list
+
+    def get_anagrams(self):
+        """Returns a list of Groups containing anagrams
+
+        Returns:
+            list: List of grouped anagrams
+        """
+        return self.__grouped_records
                 
     def output(self):
         for group in self.__grouped_records:
