@@ -1,6 +1,10 @@
 from mapper import Mapper
 from shuffler import Shuffler
 from reducer import Reducer
+from build_stop_words import build_json
+
+build_json()
+
 
 words = None
 with open("test_book.txt", 'r') as f:
@@ -20,4 +24,4 @@ shuffled_mapping = shuffler.get_shuffled_mapping()
 # Run the reducer
 reducer = Reducer(shuffled_mapping)
 reducer.reduce()
-reducer.output()
+#reducer.output()
