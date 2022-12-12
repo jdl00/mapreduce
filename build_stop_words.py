@@ -5,6 +5,8 @@ from json import dump
 Simple script to build the stop words json file
 '''
 def build_json():
+    """Generates a string array of stop words.
+    """
     # Get the list of stop words from the url
     stop_words = ""
     with get("https://www.textfixer.com/tutorials/common-english-words-with-contractions.txt") as response:

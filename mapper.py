@@ -12,6 +12,8 @@ class Mapper():
     # Regex for only symbols
     CONST_RE_SYMBOLS = r'[^\w\s]'
 
+    CONST_RE_NEWLINE= r'\n'
+
     def __init__(self, lines):
         """Initialises an instance of the mapper
 
@@ -27,6 +29,17 @@ class Mapper():
 
         with open("stop_words.json", "r") as f:
             self.__stop_words = load(f)
+
+    def __final_word_checks(self, word):
+        if not word: return False
+
+        if word in self.__stop_words: return False
+
+        if len(word) < 2: return False
+
+        return True
+        
+
     
     def __clean(self):
         """ Cleans the list of words, so that they are all just natural words
@@ -34,7 +47,7 @@ class Mapper():
         assert len(self.__lines) > 0, "Expected to be filled with lines from the txt"
 
         # We also want to clean the stop words to allow proper comparison
-        self.__stop_words = [word.replace('\'','') for word in self.__stop_words]
+        self.__stop_words = [sub(self.CONST_RE_SYMBOLS, "", word) for word in self.__stop_words]
 
         # Replace all newlines with a space to mark for splitting
         lines = [line.replace("\n"," ") for line in self.__lines]
@@ -47,17 +60,21 @@ class Mapper():
 
         # Split by spaces to just get words
         split_words = temp_str.split(' ')
-
+       
         # Extract out only the words in the string 
         split_words = [''.join(findall(self.CONST_RE_WORDS, word)) for word in split_words]
 
         # Removes empty elements and converts all the elements to lower case
         # as well as removing single letters
-        split_words = [word.lower() for word in split_words if word and len(word) > 1]
+
+        # as well as removing single letters
+        split_words = [word.lower() for word in split_words if self.__final_word_checks(word)]
+
+        #split_words = [word.lower() for word in split_words if word and len(word) > 1]
 
         # Remove all the words in the stop words list
-        split_words = [word for word in split_words if word in self.__stop_words]
-
+        #split_words = [word for word in split_words if not word in self.__stop_words]
+        
         # Removes duplicated words and stores to the words variable
         unique_set = set(split_words)
         self.__words = list(unique_set)

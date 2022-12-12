@@ -10,6 +10,7 @@ RUN apt-get -y install python3-pip
 RUN apt-get -y install curl
 RUN apt-get -y install gcc
 RUN pip3 install requests
+RUN pip3 install google-cloud-storage
 
 # In order to launch our python code, we must import it into our image.
 # We use the keyword 'COPY' to do that.
@@ -23,6 +24,11 @@ RUN curl https://sdk.cloud.google.com | bash
 ENV PATH /root/google-cloud-sdk/bin:$PATH
 RUN gcloud components install gsutil
 
+# Setup book path
+RUN mkdir books
+RUN gsutil cp -r gs://coc105-gutenburg-5000books/ books/
+RUN ls books/
+
 # Run the gsutil command when the container starts
 CMD ["gsutil"]
 
@@ -32,6 +38,8 @@ COPY build_stop_words.py /
 COPY mapper.py /
 COPY reducer.py /
 COPY shuffler.py /
+COPY book_anagrams.py /
+COPY key.json /
 
 # We need to define the command to launch when we are going to run the image.
 # We use the keyword 'CMD' to do that.
