@@ -12,8 +12,6 @@ class Mapper():
     # Regex for only symbols
     CONST_RE_SYMBOLS = r'[^\w\s]'
 
-    CONST_RE_NEWLINE= r'\n'
-
     def __init__(self, lines):
         """Initialises an instance of the mapper
 
@@ -31,10 +29,21 @@ class Mapper():
             self.__stop_words = load(f)
 
     def __final_word_checks(self, word):
+        """Performs the final checks on the words
+
+        Args:
+            word (string): Word to be checked
+
+        Returns:
+            bool: Whether the word is valid or not 
+        """
+        # Check if the word is empty
         if not word: return False
 
+        # Check if the word is in the stop list
         if word in self.__stop_words: return False
 
+        # Check if the length of the word is greater than 1
         if len(word) < 2: return False
 
         return True
@@ -66,15 +75,8 @@ class Mapper():
 
         # Removes empty elements and converts all the elements to lower case
         # as well as removing single letters
-
-        # as well as removing single letters
         split_words = [word.lower() for word in split_words if self.__final_word_checks(word)]
 
-        #split_words = [word.lower() for word in split_words if word and len(word) > 1]
-
-        # Remove all the words in the stop words list
-        #split_words = [word for word in split_words if not word in self.__stop_words]
-        
         # Removes duplicated words and stores to the words variable
         unique_set = set(split_words)
         self.__words = list(unique_set)

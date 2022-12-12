@@ -24,11 +24,6 @@ RUN curl https://sdk.cloud.google.com | bash
 ENV PATH /root/google-cloud-sdk/bin:$PATH
 RUN gcloud components install gsutil
 
-# Setup book path
-RUN mkdir books
-RUN gsutil cp -r gs://coc105-gutenburg-5000books/ books/
-RUN ls books/
-
 # Run the gsutil command when the container starts
 CMD ["gsutil"]
 
