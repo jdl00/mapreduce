@@ -32,7 +32,6 @@ class Reducer():
 
         # Setup an index for adding anagrams
         map_idx = 0
-        # todo: verify whether there is any need to store value
         for idx, (hash, _, key) in enumerate(self.__shuffled_map):
             # Skip the first record as we've already added it
             if idx == 0: continue
