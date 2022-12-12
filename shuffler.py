@@ -6,6 +6,11 @@ class Shuffler():
     """
 
     def __init__(self, mapping):
+        """Creates an instance of the shuffler
+
+        Args:
+            mapping (list): list of the Map key values.
+        """
         assert isinstance(mapping, list), "Mapping is expected to be a list"
 
         self.__mapping = mapping
