@@ -11,6 +11,7 @@ RUN apt-get -y install curl
 RUN apt-get -y install gcc
 RUN pip3 install requests
 RUN pip3 install google-cloud-storage
+RUN pip3 install flask
 
 COPY main.py /
 COPY group.py /
@@ -20,9 +21,11 @@ COPY reducer.py /
 COPY shuffler.py /
 COPY book_anagrams.py /
 COPY key.json /
+COPY requirements.txt /
 
 # We need to define the command to launch when we are going to run the image.
 # We use the keyword 'CMD' to do that.
 # The following command will execute "python ./main.py".
 #CMD [ "python", "./main.py" ]
 ENTRYPOINT ["python", "./main.py"]
+CMD exec gunicorn --bind :$PORT --workers 1 --threads 8 --timeout 0 main:app
