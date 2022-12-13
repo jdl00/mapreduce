@@ -123,7 +123,7 @@ class BookAnagrams():
         #Run the shuffler
         shuffler = Shuffler(self.__list_data)
         shuffler.shuffle()
-        self.__list_data = shuffler.get_shuffled_mapping()
+        self.__list_data = shuffler.get()
 
         end = perf_counter()
         print(f"Shuffler: Elapsed time: {end-start:.3f} seconds")

@@ -48,6 +48,7 @@ class Shuffler():
         assert isinstance(word, str), "Word is expected to be a string"
         assert isinstance(value, int), "Value is expected to be a int"
 
+        # Forms a tuple of the hashed word, its value and its original value
         return (self.__sort_and_hash(word), value, word)
 
     
@@ -62,7 +63,7 @@ class Shuffler():
         # Sort the mapping using the hashed value
         self.__shuffled_mapping = sorted(self.__mapping, key=lambda x: x[0])
 
-    def get_shuffled_mapping(self):
+    def get(self):
         """Gets the shuffled mapping
 
         Returns:

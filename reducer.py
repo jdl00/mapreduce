@@ -22,7 +22,6 @@ class Reducer():
     def reduce(self):
         """Reduce the map to only anagrams, and create the groups
         """
-        
         assert not self.__grouped_records, "List has already been reduced"
 
         # Get the Front of the maps hash, and create the first group
@@ -62,6 +61,11 @@ class Reducer():
         self.__grouped_records = new_list
                 
     def output(self):
+        """Generates the final list of anagrams 
+
+        Returns:
+            list: list of sublists of anagrams
+        """
         anagrams = []
         for group in self.__grouped_records:
             unique_set = set(group.anagrams)
