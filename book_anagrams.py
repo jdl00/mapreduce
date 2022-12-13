@@ -17,13 +17,13 @@ class BookAnagrams():
     """
 
     # Input bucket name 
-    CONST_INPUT_BUCKET = "word_input"
+    CONST_INPUT_BUCKET = "coc150-jdl-2022-book-anagram-word-input"
     # Input file name
     CONST_INPUT_FILE_NAME = "books.txt"
     # Project used
     CONST_PROJECT = "cloudcoursework-370915"
     # Output bucket name
-    CONST_OUTPUT_BUCKET = "word_output"
+    CONST_OUTPUT_BUCKET = "coc150-jdl-2022-book-anagram-word-output"
 
     def __init__(self):
         """Creates a BookAnagrams instance

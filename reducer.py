@@ -68,6 +68,7 @@ class Reducer():
         """
         anagrams = []
         for group in self.__grouped_records:
+            # Ensure the list is unique and remove any duplicates
             unique_set = set(group.anagrams)
             anagram_list = list(unique_set)
             if len(anagram_list) > 1:

@@ -12,6 +12,7 @@ app = Flask(__name__)
 @app.route("/")
 def run():
     start = perf_counter()
+    # Run the anagrams code
     build_json()
     anagrams = BookAnagrams()
     anagrams.run()
@@ -19,6 +20,7 @@ def run():
 
 
 def main():
+    # Start the listener
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
     
 if __name__ == "__main__":
